@@ -1,0 +1,19 @@
+{
+    "scriptFile": "__init__.py",
+    "bindings": [
+        {
+            "name": "mytimer",
+            "type": "timerTrigger",
+            "direction": "in",
+            "schedule": "0 */15 * * * *"
+        },
+        {
+            "name": "msg",
+            "type": "queue",
+            "direction": "out",
+            "queueName": "s3download",
+            "connection": "FDRStorage"
+        }
+    ]
+  }
+  

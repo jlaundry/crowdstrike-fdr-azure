@@ -1,0 +1,19 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "msg",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "s3download",
+      "connection": "FDRStorage"
+    },
+    {
+      "name": "outfile",
+      "type": "blob",
+      "direction": "out",
+      "connection": "FDRStorage",
+      "path": "fdr/{queueTrigger}"
+    }
+  ]
+}
