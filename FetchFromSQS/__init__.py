@@ -10,6 +10,7 @@ import azure.functions as func
 import boto3
 
 VISIBILITY_TIMEOUT = 300
+MESSAGE_LIMIT = 10
 
 
 # def main(mytimer: func.TimerRequest, msg: func.Out[func.QueueMessage]) -> None:
@@ -30,9 +31,10 @@ def main(mytimer: func.TimerRequest, msg: func.Out[typing.List[str]]) -> None:
     file_count = 0
     bytes_sum = 0
 
-    for fdr_queue_item in queue.receive_messages(VisibilityTimeout=VISIBILITY_TIMEOUT):
+    for fdr_queue_item in queue.receive_messages(MaxNumberOfMessages=MESSAGE_LIMIT, VisibilityTimeout=VISIBILITY_TIMEOUT):
         queue_count += 1
         body = json.loads(fdr_queue_item.body)
+        logging.info(f"SQS item: {body}")
 
         bytes_sum += body['totalSize']
 
